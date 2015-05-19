@@ -1,0 +1,16 @@
+﻿@model TemplateWebsite.Shared.Models.ContainerLatestUpdates
+@{
+    ViewBag.Title = "Latest Updates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Latest Updates</h1>
+<div class="update-container">
+    @foreach (var update in Model.Updates) {
+        <div id="@update.UpdateID" class="update">
+            <h3 class="version">Update @update.VersionNum</h3>
+            <p class="date">@update.EffectiveDate</p>
+            <p class="content">@update.UpdateNotes</p>
+        </div>
+    }
+</div>

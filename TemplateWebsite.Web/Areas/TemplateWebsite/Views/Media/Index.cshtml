@@ -1,0 +1,31 @@
+﻿@model TemplateWebsite.Shared.Models.ContainerMedia
+@{
+    ViewBag.Title = "Media";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="Scripts/jquery.lightbox.js"></script>
+<link rel="stylesheet" type="text/css" href="Content/lightbox.css" />
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.lightbox').lightbox();
+    });
+</script>
+
+<h1>Screenshots</h1>
+<div id="screenshots" class="collection">
+    @foreach (var screenshot in Model.Screenshots) { 
+        <a href="@screenshot.URL" class="lightbox" rel="screenshot-gallery">
+                <img width="@screenshot.ThumbnailResolutionX"
+                     height="@screenshot.ThumbnailResolutionY"
+                     src="@screenshot.ThumbnailURL"
+                     alt="@screenshot.AlternateText" />
+        </a>
+    }
+</div>
+<h1>Testing</h1>
+<div id="videos" class="collection">
+    <a href="#"><img height="213" width="380" src="~/Images/Screenshots/Zurich-1920.1080.jpg" /></a>
+    <a href="#"><img height="213" width="380" src="~/Images/Screenshots/Zurich-1920.1080.jpg" /></a>
+    <a href="#"><img height="213" width="380" src="~/Images/Screenshots/Zurich-1920.1080.jpg" /></a>
+    <a href="#"><img height="213" width="380" src="~/Images/Screenshots/Zurich-1920.1080.jpg" /></a>
+</div>

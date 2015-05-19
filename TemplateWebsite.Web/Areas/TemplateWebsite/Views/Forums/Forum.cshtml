@@ -1,0 +1,27 @@
+﻿@model TemplateWebsite.Shared.Models.ContainerForumsForum
+@{
+    ViewBag.Title = Model.Forum.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="forum-header">
+    <a href="@Url.Action("Index", "Forums")"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+    <h2>@Model.Forum.Title</h2>
+    <a href="@Url.Action("NewTopic", "Forums", new { forumID = Model.Forum.ForumID })" class="btn btn-default">New Topic</a>
+</div>
+<div class="topic-container">
+    @if (Model.Topics.Count() > 0) {
+        foreach (var topic in Model.Topics) {
+            <a href="@Url.Action("Topic", "Forums", new { urlName = topic.UrlName })">
+                <div id="@topic.TopicID" class="topic">
+                    <div>
+                        <h3 class="title">@topic.Title</h3>
+                        <p class="stats">Post Count: @topic.PostCount, Last Post By: @topic.LastPosterName on @topic.LastPostDate</p>
+                    </div>
+                </div>
+            </a>
+        }
+    } else {
+        <h2>No Topics Found</h2>
+    }
+</div>

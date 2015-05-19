@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TemplateWebsite.RepositoryLayer.Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ForumsForums">
+          <Key>
+            <PropertyRef Name="ForumID" />
+          </Key>
+          <Property Name="ForumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ForumsPosts">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TopicID" Type="int" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsBasePost" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="IP" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="PostDate" Type="datetime" Nullable="false" />
+          <Property Name="EditDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ForumsTopics">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForumID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaScreenshots">
+          <Key>
+            <PropertyRef Name="ScreenshotID" />
+          </Key>
+          <Property Name="ScreenshotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlternateText" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="URL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ResolutionX" Type="int" Nullable="false" />
+          <Property Name="ResolutionY" Type="int" Nullable="false" />
+          <Property Name="ThumbnailURL" Type="nvarchar(max)" />
+          <Property Name="ThumbnailResolutionX" Type="int" />
+          <Property Name="ThumbnailResolutionY" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Updates">
+          <Key>
+            <PropertyRef Name="UpdateID" />
+          </Key>
+          <Property Name="UpdateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VersionNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+          <Property Name="UpdateNotes" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EffectiveDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WebsiteUsers">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HashedPassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedOnDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ForumsPostsForumsTopics">
+          <End Role="ForumsTopics" Type="Self.ForumsTopics" Multiplicity="1" />
+          <End Role="ForumsPosts" Type="Self.ForumsPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForumsTopics">
+              <PropertyRef Name="TopicID" />
+            </Principal>
+            <Dependent Role="ForumsPosts">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumsPostsUsers">
+          <End Role="WebsiteUsers" Type="Self.WebsiteUsers" Multiplicity="1" />
+          <End Role="ForumsPosts" Type="Self.ForumsPosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebsiteUsers">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ForumsPosts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumsTopicsForumsForums">
+          <End Role="ForumsForums" Type="Self.ForumsForums" Multiplicity="1" />
+          <End Role="ForumsTopics" Type="Self.ForumsTopics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForumsForums">
+              <PropertyRef Name="ForumID" />
+            </Principal>
+            <Dependent Role="ForumsTopics">
+              <PropertyRef Name="ForumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TemplateWebsiteRepositoryLayerEntitiesStoreContainer">
+          <EntitySet Name="ForumsForums" EntityType="Self.ForumsForums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForumsPosts" EntityType="Self.ForumsPosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForumsTopics" EntityType="Self.ForumsTopics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaScreenshots" EntityType="Self.MediaScreenshots" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Updates" EntityType="Self.Updates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebsiteUsers" EntityType="Self.WebsiteUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ForumsPostsForumsTopics" Association="Self.FK_ForumsPostsForumsTopics">
+            <End Role="ForumsTopics" EntitySet="ForumsTopics" />
+            <End Role="ForumsPosts" EntitySet="ForumsPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumsPostsUsers" Association="Self.FK_ForumsPostsUsers">
+            <End Role="WebsiteUsers" EntitySet="WebsiteUsers" />
+            <End Role="ForumsPosts" EntitySet="ForumsPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumsTopicsForumsForums" Association="Self.FK_ForumsTopicsForumsForums">
+            <End Role="ForumsForums" EntitySet="ForumsForums" />
+            <End Role="ForumsTopics" EntitySet="ForumsTopics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TemplateWebsite.RepositoryLayer.Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Update">
+          <Key>
+            <PropertyRef Name="UpdateID" />
+          </Key>
+          <Property Name="UpdateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VersionNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EffectiveDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="WebsiteDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Updates" EntityType="Self.Update" />
+          <EntitySet Name="MediaScreenshots" EntityType="TemplateWebsite.RepositoryLayer.Entities.MediaScreenshot" />
+          <EntitySet Name="ForumsForums" EntityType="TemplateWebsite.RepositoryLayer.Entities.ForumsForum" />
+          <EntitySet Name="ForumsPosts" EntityType="TemplateWebsite.RepositoryLayer.Entities.ForumsPost" />
+          <EntitySet Name="ForumsTopics" EntityType="TemplateWebsite.RepositoryLayer.Entities.ForumsTopic" />
+          <EntitySet Name="WebsiteUsers" EntityType="TemplateWebsite.RepositoryLayer.Entities.WebsiteUser" />
+          <AssociationSet Name="FK_ForumsTopicsForumsForums" Association="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsTopicsForumsForums">
+            <End Role="ForumsForum" EntitySet="ForumsForums" />
+            <End Role="ForumsTopic" EntitySet="ForumsTopics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumsPostsForumsTopics" Association="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsForumsTopics">
+            <End Role="ForumsTopic" EntitySet="ForumsTopics" />
+            <End Role="ForumsPost" EntitySet="ForumsPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForumsPostsUsers" Association="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsUsers">
+            <End Role="WebsiteUser" EntitySet="WebsiteUsers" />
+            <End Role="ForumsPost" EntitySet="ForumsPosts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="MediaScreenshot">
+          <Key>
+            <PropertyRef Name="ScreenshotID" />
+          </Key>
+          <Property Name="ScreenshotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlternateText" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResolutionX" Type="Int32" Nullable="false" />
+          <Property Name="ResolutionY" Type="Int32" Nullable="false" />
+          <Property Name="ThumbnailURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailResolutionX" Type="Int32" />
+          <Property Name="ThumbnailResolutionY" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ForumsForum">
+          <Key>
+            <PropertyRef Name="ForumID" />
+          </Key>
+          <Property Name="ForumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ForumsTopics" Relationship="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsTopicsForumsForums" FromRole="ForumsForum" ToRole="ForumsTopic" />
+        </EntityType>
+        <EntityType Name="ForumsPost">
+          <Key>
+            <PropertyRef Name="PostID" />
+          </Key>
+          <Property Name="PostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TopicID" Type="Int32" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsBasePost" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="PostDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ForumsTopic" Relationship="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsForumsTopics" FromRole="ForumsPost" ToRole="ForumsTopic" />
+          <NavigationProperty Name="WebsiteUser" Relationship="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsUsers" FromRole="ForumsPost" ToRole="WebsiteUser" />
+        </EntityType>
+        <EntityType Name="ForumsTopic">
+          <Key>
+            <PropertyRef Name="TopicID" />
+          </Key>
+          <Property Name="TopicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForumID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ForumsForum" Relationship="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsTopicsForumsForums" FromRole="ForumsTopic" ToRole="ForumsForum" />
+          <NavigationProperty Name="ForumsPosts" Relationship="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsForumsTopics" FromRole="ForumsTopic" ToRole="ForumsPost" />
+        </EntityType>
+        <EntityType Name="WebsiteUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HashedPassword" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ForumsPosts" Relationship="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsUsers" FromRole="WebsiteUser" ToRole="ForumsPost" />
+        </EntityType>
+        <Association Name="FK_ForumsTopicsForumsForums">
+          <End Type="TemplateWebsite.RepositoryLayer.Entities.ForumsForum" Role="ForumsForum" Multiplicity="1" />
+          <End Type="TemplateWebsite.RepositoryLayer.Entities.ForumsTopic" Role="ForumsTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForumsForum">
+              <PropertyRef Name="ForumID" />
+            </Principal>
+            <Dependent Role="ForumsTopic">
+              <PropertyRef Name="ForumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumsPostsForumsTopics">
+          <End Type="TemplateWebsite.RepositoryLayer.Entities.ForumsTopic" Role="ForumsTopic" Multiplicity="1" />
+          <End Type="TemplateWebsite.RepositoryLayer.Entities.ForumsPost" Role="ForumsPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForumsTopic">
+              <PropertyRef Name="TopicID" />
+            </Principal>
+            <Dependent Role="ForumsPost">
+              <PropertyRef Name="TopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForumsPostsUsers">
+          <End Type="TemplateWebsite.RepositoryLayer.Entities.WebsiteUser" Role="WebsiteUser" Multiplicity="1" />
+          <End Type="TemplateWebsite.RepositoryLayer.Entities.ForumsPost" Role="ForumsPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebsiteUser">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ForumsPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TemplateWebsiteRepositoryLayerEntitiesStoreContainer" CdmEntityContainer="WebsiteDatabaseEntities">
+          <EntitySetMapping Name="Updates">
+            <EntityTypeMapping TypeName="TemplateWebsite.RepositoryLayer.Entities.Update">
+              <MappingFragment StoreEntitySet="Updates">
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="VersionNum" ColumnName="VersionNum" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UpdateNotes" ColumnName="UpdateNotes" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MediaScreenshots">
+            <EntityTypeMapping TypeName="TemplateWebsite.RepositoryLayer.Entities.MediaScreenshot">
+              <MappingFragment StoreEntitySet="MediaScreenshots">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ThumbnailResolutionY" ColumnName="ThumbnailResolutionY" />
+                <ScalarProperty Name="ThumbnailResolutionX" ColumnName="ThumbnailResolutionX" />
+                <ScalarProperty Name="ThumbnailURL" ColumnName="ThumbnailURL" />
+                <ScalarProperty Name="ResolutionY" ColumnName="ResolutionY" />
+                <ScalarProperty Name="ResolutionX" ColumnName="ResolutionX" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="AlternateText" ColumnName="AlternateText" />
+                <ScalarProperty Name="ScreenshotID" ColumnName="ScreenshotID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForumsForums">
+            <EntityTypeMapping TypeName="TemplateWebsite.RepositoryLayer.Entities.ForumsForum">
+              <MappingFragment StoreEntitySet="ForumsForums">
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ForumID" ColumnName="ForumID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForumsPosts">
+            <EntityTypeMapping TypeName="TemplateWebsite.RepositoryLayer.Entities.ForumsPost">
+              <MappingFragment StoreEntitySet="ForumsPosts">
+                <ScalarProperty Name="EditDate" ColumnName="EditDate" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsBasePost" ColumnName="IsBasePost" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForumsTopics">
+            <EntityTypeMapping TypeName="TemplateWebsite.RepositoryLayer.Entities.ForumsTopic">
+              <MappingFragment StoreEntitySet="ForumsTopics">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ForumID" ColumnName="ForumID" />
+                <ScalarProperty Name="TopicID" ColumnName="TopicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebsiteUsers">
+            <EntityTypeMapping TypeName="TemplateWebsite.RepositoryLayer.Entities.WebsiteUser">
+              <MappingFragment StoreEntitySet="WebsiteUsers">
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreatedOnDate" ColumnName="CreatedOnDate" />
+                <ScalarProperty Name="HashedPassword" ColumnName="HashedPassword" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

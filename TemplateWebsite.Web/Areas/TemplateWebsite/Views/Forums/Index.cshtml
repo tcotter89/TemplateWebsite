@@ -1,0 +1,27 @@
+﻿@model TemplateWebsite.Shared.Models.ContainerForumsIndex
+@{
+    ViewBag.Title = "Forums";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Forums</h1>
+<div class="forum-container">
+    @if (Model.Forums.Count() > 0) {
+        foreach (var forum in Model.Forums) {
+            <a href="@Url.Action("Forum", "Forums", new { urlName = forum.UrlName })">
+                <div id="@forum.ForumID" class="forum">
+                    <div>
+                        <h3 class="title">@forum.Title</h3>
+                        <p class="stats">Topic Count: @forum.TopicCount, Post Count: @forum.PostCount</p>
+                    </div>
+                    <div>
+                        <p class="sub-title">@forum.SubTitle</p>
+                        <p class="date">Last Post Date: @forum.LastPostDate</p>
+                    </div>
+                </div>
+            </a>
+        }
+    } else {
+        <h2>No Forums Found</h2>
+    }
+</div>

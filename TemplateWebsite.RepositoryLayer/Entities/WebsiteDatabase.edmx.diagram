@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7af6cdfa220a489c9cb5460d7a38aa1c" Name="Diagram1">
+        <EntityTypeShape EntityType="TemplateWebsite.RepositoryLayer.Entities.Update" Width="1.5" PointX="0.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TemplateWebsite.RepositoryLayer.Entities.MediaScreenshot" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TemplateWebsite.RepositoryLayer.Entities.ForumsForum" Width="1.5" PointX="0.5" PointY="1.5" />
+        <EntityTypeShape EntityType="TemplateWebsite.RepositoryLayer.Entities.ForumsPost" Width="1.5" PointX="5" PointY="1" />
+        <EntityTypeShape EntityType="TemplateWebsite.RepositoryLayer.Entities.ForumsTopic" Width="1.5" PointX="2.75" PointY="1.5" />
+        <EntityTypeShape EntityType="TemplateWebsite.RepositoryLayer.Entities.WebsiteUser" Width="1.5" PointX="5" PointY="4.125" />
+        <AssociationConnector Association="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsTopicsForumsForums" />
+        <AssociationConnector Association="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsForumsTopics" />
+        <AssociationConnector Association="TemplateWebsite.RepositoryLayer.Entities.FK_ForumsPostsUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

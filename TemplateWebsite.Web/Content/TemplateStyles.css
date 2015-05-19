@@ -1,0 +1,288 @@
+﻿/*=====================================================*/
+/*=================== GLOBAL STYLES ===================*/
+/*=====================================================*/
+.centered {
+    text-align:center;
+}
+a:hover {
+    text-decoration:none;
+    color:#000;
+}
+.content-btn {
+    padding-left:5px; padding-right:5px; padding-top:20px; padding-bottom:20px;
+    margin-bottom:10px;
+    background-color:#eee;
+    text-align:center;
+    display:block;
+}
+.content-btn:hover {
+    /*text-decoration:none;
+    color:#000;*/
+}
+
+.buttons {
+    text-align:center;
+}
+.buttons a,
+.buttons input {
+    margin-left:20px; margin-right:20px;
+    min-width:125px;
+}
+
+
+/*=====================================================*/
+/*=================== LAYOUT STYLES ===================*/
+/*=====================================================*/
+html {
+    background: url(/Images/sunrise-field.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color:transparent;
+}
+body {
+    padding-top:1px;
+    background-color:transparent;
+}
+.top-spacing {
+    margin-bottom:50px;
+}
+.container {
+    background-color:white;
+}
+.mobile-background {
+    width:100%;
+    height:1000%;
+    position:absolute;
+    display:none;
+}
+@media (max-width:767px) {
+    .container {
+        padding:0px;
+        margin-left:15px; margin-right:15px;
+    }
+    .top-spacing {
+        margin-bottom:15px;
+    }
+}
+/*@media (max-width:767px) {
+    .container {
+        background-color:transparent;
+    }
+    .mobile-background {
+        display:block;
+        background-color:white;
+        background-size: cover;
+        opacity:0.5;
+    }
+}*/
+.header {
+    margin-bottom:10px;
+}
+.right-sidebar {
+    float:right;
+}
+.right-sidebar div {
+    margin-left:5px; margin-right:5px; margin-bottom:10px;
+}
+@media (max-width:767px) {
+    .right-sidebar {
+        float:none;
+        text-align:center;
+    }
+    .right-sidebar .content-btn {
+        width:45%;
+        display:inline-block;
+    }
+}
+.nav {
+    border-bottom:3px solid #428bca;
+}
+.nav-pills li {
+    width:125px;
+    display:inline-block;
+    float:none;
+}
+.nav-pills li a {
+    padding-top:15px; padding-bottom:15px;
+    border-radius:0px;
+}
+.nav-pills li.active a {
+    background-color:#428bca;
+}
+@media (max-width:767px) {
+    .nav-pills li {
+        width:auto;
+        display:block;
+        float:none;
+    }
+}
+.login-form {
+    display:inline-block;
+    float:none;
+}
+.login .nav {
+    width:100%;
+}
+.login .nav li {
+    width:50%;
+    text-align:center;
+}
+@media (max-width:767px) {
+    .login .nav li {
+        width:100%;
+    }
+    .navbar-nav {
+        margin:0px;
+    }
+}
+
+/*=====================================================*/
+/*=================== MEDIA STYLES ====================*/
+/*=====================================================*/
+.collection {
+    text-align:center;
+}
+.collection a {
+    margin-left:5px; margin-right:5px; margin-top:5px; margin-bottom:5px;
+    display:inline-block;
+}
+
+/*=====================================================*/
+/*=================== MEDIA STYLES ====================*/
+/*=====================================================*/
+.update-container .update {
+    border-bottom:1px solid #eeeeee;
+}
+.update-container .update:last-child {
+    border-bottom:none;
+}
+
+/*=====================================================*/
+/*=================== FORUM STYLES ====================*/
+/*=====================================================*/
+.forum-header {
+    min-height:60px;
+    margin-bottom:5px;
+}
+.forum-header h2 {
+    float:left;
+}
+.forum-header .glyphicon {
+    float:left;
+    margin-top:17px;
+    margin-right:11px;
+    font-size:30px;
+    color:#bbbbdd;
+}
+.forum-header .glyphicon:hover {
+    color:steelblue;
+}
+.forum-header .btn {
+    float:right;
+    margin-top:20px;
+}
+.forum-container,
+.topic-container,
+.post-container { 
+    display:block;
+}
+.forum-container a,
+.topic-container a {
+    display:block;
+    padding-left:10px; padding-right:10px; padding-bottom:5px; padding-top:5px;
+    color:black;
+    border-bottom:1px solid #eeeeee;
+}
+.forum-container a:last-child,
+.topic-container a:last-child {
+    border-bottom:none;
+}
+.forum-container a:hover,
+.topic-container a:hover {
+    background-color:#eeeeee;
+}
+/* =========== Forum =========== */
+.forum .title {
+    display:inline-block;
+}
+.forum .sub-title {
+    display:inline-block;
+}
+.forum .stats {
+    float:right;
+    margin-top:20px;
+}
+.forum .date {
+    float:right;
+}
+/* =========== Topic =========== */
+.topic .title {
+    display:inline-block;
+}
+.topic .stats {
+    float:right;
+    margin-top:23px;
+}
+/* =========== Post =========== */
+.post-container {
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.post {
+    margin-top:20px;
+}
+.post .header {
+    color: white;
+    background-color:#428bca;
+    padding:5px;
+}
+.post .header .user {
+    margin:0px;
+    display:inline-block;
+}
+.post .header .date {
+    margin-top:3px;
+    float:right;
+}
+.new-post-container {
+    display:none;   /* hidden until 'New Reply' is clicked */
+}
+.new-post {
+    margin-bottom:10px;
+}
+.new-post .content {
+    max-width:800px;
+}
+/* =========== New Topic =========== */
+.new-topic {
+    margin-bottom:10px;
+}
+.new-topic .title {
+    display:block;
+    margin-bottom:5px;
+    width:250px;
+}
+.new-topic .content {
+    max-width:800px;
+}
+
+/*=====================================================*/
+/*================ REALM STATUS STYLES ================*/
+/*=====================================================*/
+.online {
+    color:#00CC00;
+}
+.offline {
+    color:#CC0000;
+}
+.low {
+    color:#00CC00;
+}
+.medium {
+    color:#FF9933;
+}
+.high {
+    color:#CC0000;
+}

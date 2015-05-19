@@ -1,0 +1,20 @@
+﻿@model TemplateWebsite.Shared.Models.ContainerNewTopic
+@{
+    ViewBag.Title = "New Topic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="forum-header">
+    <a href="@Url.Action("Forum", "Forums", new { urlName = Model.Forum.UrlName })"><span class="glyphicon glyphicon-circle-arrow-left"></span></a>
+    <h2>@Model.Forum.Title</h2>
+</div>
+@using (Html.BeginForm("SubmitNewTopic", "Forums", new { forumID = Model.Forum.ForumID, forumUrlName = Model.Forum.UrlName })) {
+    <div class="new-topic">
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @placeholder = "Topic Title", @class = "title" } })
+        @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @cols="115", @rows="12", @class = "content" } })
+    </div>
+    <div class="buttons">
+        <input type="submit" class="btn btn-default" value="Submit" />
+        <a href="@Url.Action("Forum", "Forums", new { forumID = Model.Forum.ForumID, urlName = Model.Forum.UrlName })" class="btn btn-default">Cancel</a>
+    </div>
+}
